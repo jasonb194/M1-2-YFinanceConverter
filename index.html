@@ -1,0 +1,89 @@
+<html><head>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+  <style id="compiled-css" type="text/css">
+body {
+  background: #20262E;
+  padding: 20px;
+  font-family: Helvetica;
+}
+
+#main {
+  background: #fff;
+  border-radius: 4px;
+  padding: 20px;
+  font-size: 25px;
+  text-align: center;
+  transition: all 0.2s;
+  margin: 0 auto;
+  width: 90%;
+}
+
+button {
+  background: #0084ff;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 14px;
+  font-size: 15px;
+  color: #fff;
+}
+
+#banner-message.alt {
+  background: #0084ff;
+  color: #fff;
+  margin-top: 40px;
+  width: 200px;
+}
+
+#banner-message.alt button {
+  background: #fff;
+  color: #000;
+}
+
+textarea {
+  height: 80vh;
+  width: 80vw;
+}
+  </style>
+  <script type="text/javascript">
+window.onload=function(){
+var button = $("button");
+
+button.on("click", function () {
+    val = $('#M1_text').val().split("\n");
+    
+	for (var i = 0; i < val.length; i++) {
+        let temp = val[i].match(/\d . (\d\d)\/(\d\d)\/(\d\d) \d\d\/\d\d\/\d\d ([\d\.]+) (\S+) ([\d\.]+).*/);
+        try {
+            val[i] = temp[5] + ",,,,,,,,,20" + temp[3] + temp[1] + temp[2] + "," + temp[6] + "," + temp[4];
+        } catch (e) {
+           val[i] = "";
+        }
+    }
+    val = val.filter(function (el) {
+            return el != "";
+        });
+
+	let csvContent = "data:text/csv;charset=utf-8,";
+
+	val.forEach(function(row) {
+		csvContent += row + "\r\n";
+	});
+	var encodedUri = encodeURI(csvContent);
+	var link = document.createElement("a");
+	link.setAttribute("href", encodedUri);
+	link.setAttribute("download", "my_data.csv");
+	document.body.appendChild(link);
+	link.click();
+})
+
+
+    } </script>
+
+</head>
+<body>
+    <div id="main">
+
+<textarea id="M1_text" rows="" cols="40"></textarea><br/><br/>
+<button>Output M1 Trade Confirm to CSV</button>
+</div>
+</body></html>
