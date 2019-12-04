@@ -52,7 +52,7 @@ button.on("click", function () {
     val = $('#M1_text').val().split("\n");
     
 	for (var i = 0; i < val.length; i++) {
-        let temp = val[i].match(/\d . (\d\d)\/(\d\d)\/(\d\d) \d\d\/\d\d\/\d\d ([\d\.]+) (\S+) ([\d\.]+).*/);
+        let temp = val[i].match(/\d B (\d\d)\/(\d\d)\/(\d\d) \d\d\/\d\d\/\d\d ([\d\.]+) (\S+) ([\d\.]+).*/);
         try {
             val[i] = temp[5] + ",,,,,,,,,20" + temp[3] + temp[1] + temp[2] + "," + temp[6] + "," + temp[4];
         } catch (e) {
